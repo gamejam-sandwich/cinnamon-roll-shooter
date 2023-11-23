@@ -8,16 +8,26 @@ using UnityEngine.SceneManagement;
 public class ButtonBehaviours : MonoBehaviour
 {
     public Button theButton;
-    private GameObject menu;
-    private GameObject canv;
+
 
     void Start()
     {
         Button btn = theButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
-        canv = GameObject.Find("Canvas");
-        menu = canv.GetComponent<GameObject>();
-        Debug.Log(menu);
+    }
+
+    GameObject FindObjectByName(string name)
+    {
+        GameObject[] objs = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach(GameObject obj in objs)
+        {
+            if (obj.name == name)
+            {
+                return obj;
+            }
+        }
+        return null;
     }
 
     void TaskOnClick()
@@ -28,10 +38,30 @@ public class ButtonBehaviours : MonoBehaviour
         }
         else if (theButton.name == "PauseBtn")
         {
-            Debug.Log("Paused");
-            Debug.Log(menu);
-            menu.SetActive(true);
+            Time.timeScale = 0;
+            SwitchObject("Menu", true);
         }
+        else if(theButton.name == "ResumeBtn")
+        {
+            SwitchObject("Menu", false);
+            Time.timeScale = 1;
+        }
+        else if(theButton.name == "ShopBtn")
+        {
+            SwitchObject("Shop", true);
+            SwitchObject("Menu", false);
+        }
+        else if(theButton.name == "ExitShopBtn")
+        {
+            SwitchObject("Shop", false);
+            Time.timeScale = 1;
+        }
+    }
+
+    void SwitchObject(string name, bool onOff)
+    {
+        GameObject obj = FindObjectByName(name);
+        if(obj != null) obj.SetActive(onOff);
     }
 
     
