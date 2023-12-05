@@ -13,12 +13,10 @@ public class EnemySpawner : MonoBehaviour
 
     private float timeLeft;
 
-
     void Awake()
     {
         SetTimeLeft();
     }
-
 
     void Update()
     {

@@ -9,6 +9,8 @@ public class HealthController : MonoBehaviour
     private float currentHealth;
     [SerializeField]
     private float maxHealth;
+    [SerializeField]
+    private GameObject replayBtn;
 
     public float healthLeft
     {
@@ -40,6 +42,8 @@ public class HealthController : MonoBehaviour
         if(currentHealth == 0)
         {
             OnDied.Invoke();
+            Time.timeScale = 0.5f;
+            replayBtn.SetActive(true);
         }
         else
         {

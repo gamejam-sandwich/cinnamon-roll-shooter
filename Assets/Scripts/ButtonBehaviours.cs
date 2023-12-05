@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class ButtonBehaviours : MonoBehaviour
 {
     public Button theButton;
-
+    public static bool isBun;
 
     void Start()
     {
         Button btn = theButton.GetComponent<Button>();
         btn.onClick.AddListener(TaskOnClick);
+        Debug.Log(isBun);
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
     }
 
     GameObject FindObjectByName(string name)
@@ -65,6 +71,11 @@ public class ButtonBehaviours : MonoBehaviour
             SceneManager.LoadScene("GameScreen");
         }
         else if (theButton.name == "BunBtn")
+        {
+            isBun = true;
+            SceneManager.LoadScene("GameScreen");
+        }
+        else if(theButton.name == "ReplayBtn")
         {
             SceneManager.LoadScene("GameScreen");
         }

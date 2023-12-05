@@ -17,6 +17,7 @@ public class EnemyMovement : MonoBehaviour
     private float directionCooldown;
     private Camera camera;
 
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -24,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
         targetDirection = transform.up;
         camera = Camera.main;
     }
+
 
     private void FixedUpdate()
     {
