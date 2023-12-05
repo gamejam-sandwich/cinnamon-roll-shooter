@@ -56,6 +56,18 @@ public class ButtonBehaviours : MonoBehaviour
             SwitchObject("Shop", false);
             Time.timeScale = 1;
         }
+        else if(theButton.name == "CharacterBtn")
+        {
+            SwitchObject("SelectionMenu", true);
+        }
+        else if(theButton.name == "SwirlBtn")
+        {
+            SceneManager.LoadScene("GameScreen");
+        }
+        else if (theButton.name == "BunBtn")
+        {
+            SceneManager.LoadScene("GameScreen");
+        }
     }
 
     void SwitchObject(string name, bool onOff)

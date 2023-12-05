@@ -16,6 +16,5 @@ public class ScoreUI : MonoBehaviour
     public void UpdateScore(ScoreController sc)
     {
         score.text = $"Score: {sc.Score}";
-        Debug.Log(score.text);
     }
 }
