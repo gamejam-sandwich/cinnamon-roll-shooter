@@ -2,15 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.Processors;
 
 public class HealthController : MonoBehaviour
 {
     [SerializeField]
-    private float currentHealth;
+    public float currentHealth;
     [SerializeField]
-    private float maxHealth;
-    [SerializeField]
-    private GameObject replayBtn;
+    public float maxHealth;
 
     public float healthLeft
     {
@@ -23,6 +22,7 @@ public class HealthController : MonoBehaviour
     public UnityEvent OnDied;
     public UnityEvent OnDamaged;
     public UnityEvent OnHealthChanged;
+
 
     public void TakeDamage(float damageAmt)
     {
@@ -41,12 +41,18 @@ public class HealthController : MonoBehaviour
 
         if(currentHealth == 0)
         {
+
+            if (gameObject.tag == "Player")
+            {
+                GameObject obj = ButtonBehaviours.FindObjectByName("ReplayBtn");
+                obj.SetActive(true);
+            }
             OnDied.Invoke();
-            Time.timeScale = 0.5f;
-            replayBtn.SetActive(true);
         }
         else
         {
+            AudioManager am = Util.FindObjectByName("AudioManager").GetComponent<AudioManager>();
+            am.PlaySFX(am.splat);
             OnDamaged.Invoke();
         }
     }

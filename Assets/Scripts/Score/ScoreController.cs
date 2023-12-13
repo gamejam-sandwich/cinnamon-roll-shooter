@@ -13,4 +13,10 @@ public class ScoreController : MonoBehaviour
         Score += amt;
         OnScoreChanged.Invoke();
     }
+
+    public void CostScore(int amt)
+    {
+        Score -= amt;
+        OnScoreChanged.Invoke();
+    }
 }

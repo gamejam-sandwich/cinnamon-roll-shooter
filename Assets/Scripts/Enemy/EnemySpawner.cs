@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject enemyPrefab;
     [SerializeField]
     private float minSpawnTime;
     [SerializeField]
     private float maxSpawnTime;
 
     private float timeLeft;
+    private int rand;
+
+    public GameObject[] enemyPrefabs;
 
     void Awake()
     {
@@ -24,7 +26,8 @@ public class EnemySpawner : MonoBehaviour
         
         if(timeLeft <= 0)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            rand = Random.Range(0, enemyPrefabs.Length);
+            Instantiate(enemyPrefabs[rand], transform.position, Quaternion.identity);
             SetTimeLeft();
         }
     }

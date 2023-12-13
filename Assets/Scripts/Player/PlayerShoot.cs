@@ -10,18 +10,20 @@ public class PlayerShoot : MonoBehaviour
     private GameObject bulletPrefab;
     
     [SerializeField]
-    private float bulletSpeed;
+    public float bulletSpeed;
 
     [SerializeField]
     private Transform gunOffset;
 
     [SerializeField]
-    private float timeBetweenShots;
+    public float timeBetweenShots;
+
+    [SerializeField]
+    AudioManager audio;
 
     private bool fireContinuous;
     private bool fireSingle;
     private float lastFireTime;
-
 
     void Update()
     {
@@ -42,7 +44,7 @@ public class PlayerShoot : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, gunOffset.position, transform.rotation);
         Rigidbody2D rigidbody = bullet.GetComponent<Rigidbody2D>();
-
+        audio.PlaySFX(audio.sword);
         rigidbody.velocity = bulletSpeed * transform.up;
     }
 
